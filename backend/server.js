@@ -15,7 +15,16 @@ await connectDB()
 //  MIDDLEWARE
 
 app.use(express.json());
-app.use(cors());
+// app.use(cors());
+
+app.use(cors({
+  origin: [
+    'https://quick-blog-frontend.vercel.app',  // your frontend Vercel URL
+    'http://localhost:5173'                    // local development
+  ],
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true
+}));
 
 
 //  ROUTES
