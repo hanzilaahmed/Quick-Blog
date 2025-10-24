@@ -13,7 +13,7 @@ const { title, createdAt } = blog;
     if (!confirm) return ;
 
       try {
-        const { data} = await axios.post('http://localhost:5000/api/blog/delete' , { id: blog._id})
+        const { data} = await axios.post(`${import.meta.env.VITE_BASE_URL}/api/blog/delete` , { id: blog._id})
         if (data.success) {
           toast.success(data.message)
           await fetchBlogs()
@@ -29,7 +29,7 @@ const { title, createdAt } = blog;
   
   const togglePublish = async () => {
     try {
-      const { data} = await axios.post('http://localhost:5000/api/blog/toggle-publish' , {id: blog._id})
+      const { data} = await axios.post(`${import.meta.env.VITE_BASE_URL}/api/blog/toggle-publish` , {id: blog._id})
 
       if (data.success) {
         toast.success(data.message)
