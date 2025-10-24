@@ -19,7 +19,7 @@ const [ content , setContent]  = useState('')
 
 const fetchBlogData = async () =>{
     try {
-      const { data} = await axios.get(`http://localhost:5000/api/blog/${id}`)
+      const { data} = await axios.get(`${import.meta.env.VITE_BASE_URL}/api/blog/${id}`)
       data.success ? setData(data.blog) : toast.error(data.message);
 
     } catch (error) {
@@ -29,7 +29,7 @@ const fetchBlogData = async () =>{
 
 const fetchComments = async () =>{
     try {
-      const { data } = await axios.post('http://localhost:5000/api/blog/comments' , {blogId : id})
+      const { data } = await axios.post(`${import.meta.env.VITE_BASE_URL}/api/blog/comments` , {blogId : id})
       if (data.success) {
         setComments(data.comments)
       } else{
@@ -44,7 +44,7 @@ const fetchComments = async () =>{
 const addComment = async (e)=>{
   e.preventDefault();
   try {
-    const { data} = await axios.post('http://localhost:5000/api/blog/add-comment' , {blog: id, name ,content});
+    const { data} = await axios.post(`${import.meta.env.VITE_BASE_URL}/api/blog/add-comment` , {blog: id, name ,content});
     if (data.success) {
       toast.success(data.message)
       setName('')

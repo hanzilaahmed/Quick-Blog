@@ -24,7 +24,7 @@ const AddBlog = () => {
   const generateContent = async () => {
     try {
       setLoading(true);
-      const { data } = await axios.post("http://localhost:5000/api/blog/generate", { prompt: title })
+      const { data } = await axios.post(`${import.meta.env.VITE_BASE_URL}/api/blog/generate`, { prompt: title })
       if (data.success) {
         quilRef.current.root.innerHTML = parse(data.content)
       } else {
@@ -52,7 +52,7 @@ const AddBlog = () => {
       formData.append('blog', JSON.stringify(blog))
       formData.append('image', image)
 
-      const { data } = await axios.post("http://localhost:5000/api/blog/add", formData);
+      const { data } = await axios.post(`${import.meta.env.VITE_BASE_URL}/api/blog/add`, formData);
 
       if (data.success) {
         toast.success(data.message);
